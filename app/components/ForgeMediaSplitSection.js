@@ -1,4 +1,6 @@
 import ForgeButton from "./ForgeButton";
+import ForgeEyebrow from "./ForgeEyebrow";
+import ForgeRevealHeading from "./ForgeRevealHeading";
 
 export default function ForgeMediaSplitSection({
   eyebrow,
@@ -10,13 +12,13 @@ export default function ForgeMediaSplitSection({
 }) {
   return (
     <section className={`forge-media-split layout-shell ${reverse ? "is-reverse" : ""}`}>
-      <div className="eyebrow">{eyebrow}</div>
+      <ForgeEyebrow>{eyebrow}</ForgeEyebrow>
       <div className="forge-media-split__content">
         <div className="forge-media-split__media">
           <img src={media.src} alt={media.alt} />
         </div>
         <div className="forge-media-split__copy">
-          <h2>{title}</h2>
+          <ForgeRevealHeading text={title} />
           <p>{body}</p>
           {cta ? (
             <div className="forge-media-split__actions">

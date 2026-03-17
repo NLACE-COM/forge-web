@@ -6,8 +6,14 @@ export default function ForgeWhatWeDoSection({
   activeIndex,
   label = "What we do"
 }) {
+  const totalLabel = String(slides.length).padStart(2, "0");
+
   return (
-    <section ref={sectionRef} className="what-we-do">
+    <section
+      ref={sectionRef}
+      className="what-we-do"
+      style={{ height: `${slides.length * 100}vh` }}
+    >
       <div className="what-we-do__sticky layout-shell">
         <div className="what-we-do__label">{label}</div>
         <div className="what-we-do__line" aria-hidden="true">
@@ -30,7 +36,7 @@ export default function ForgeWhatWeDoSection({
           <div className="what-we-do__index">
             <span>{slides[activeIndex].id}</span>
             <span>/</span>
-            <span>03</span>
+            <span>{totalLabel}</span>
           </div>
           <div className="what-we-do__slides">
             {slides.map((slide, index) => {
@@ -61,21 +67,42 @@ export default function ForgeWhatWeDoSection({
                     transform: `translate3d(0, ${translateY}px, 0)`
                   }}
                 >
-                  <p>
-                    {slide.words.map((word, wordIndex) => {
-                      const wordOn = wordIndex < Math.round(local * slide.words.length);
+                  <div className="what-we-do__slideContent">
+                    {slide.blocks.map((block, blockIndex) => {
+                      const revealedWords = Math.round(local * block.words.length);
+                      const Tag = block.type === "bullet" ? "li" : "p";
 
                       return (
-                        <span
-                          className={`what-we-do__word ${wordOn && isActive ? "is-on" : ""}`}
-                          key={`${slide.id}-${wordIndex}`}
+                        <Tag
+                          className={`what-we-do__block what-we-do__block--${block.type}`}
+                          key={`${slide.id}-${block.type}-${blockIndex}`}
                         >
-                          {word}
-                          {wordIndex < slide.words.length - 1 ? " " : ""}
-                        </span>
+                          {block.words.map((item, wordIndex) => {
+                            const wordProgress = (local * block.words.length) - wordIndex;
+                            const wordOpacity = Math.min(Math.max(wordProgress * 1.5, 0.2), 1);
+                            const isFullyRevealed = wordProgress >= 0.8;
+
+                            return (
+                              <span
+                                className={`what-we-do__word ${isFullyRevealed && isActive ? "is-on" : ""} ${
+                                  item.emphasis ? "is-emphasis" : ""
+                                }`}
+                                key={`${slide.id}-${blockIndex}-${wordIndex}`}
+                                style={{ 
+                                  opacity: wordOpacity,
+                                  filter: `blur(${Math.max(0, (1 - wordOpacity) * 4)}px)`,
+                                  transform: `translate3d(0, ${Math.max(0, (1 - wordOpacity) * 8)}px, 0)`
+                                }}
+                              >
+                                {item.word}
+                                {wordIndex < block.words.length - 1 ? " " : ""}
+                              </span>
+                            );
+                          })}
+                        </Tag>
                       );
                     })}
-                  </p>
+                  </div>
                 </article>
               );
             })}

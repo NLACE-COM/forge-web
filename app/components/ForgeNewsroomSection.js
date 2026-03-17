@@ -1,12 +1,13 @@
 import ForgeButton from "./ForgeButton";
 import ForgeBlobButton from "./ForgeBlobButton";
+import ForgeRevealHeading from "./ForgeRevealHeading";
 
 export default function ForgeNewsroomSection({ featured, cards }) {
   return (
     <section id="newsroom" className="newsroom-shell">
       <div className="newsroom">
         <div className="newsroom__header">
-          <h2>Newsroom</h2>
+          <ForgeRevealHeading text="Newsroom" />
           <ForgeButton href="#footer" label="View all articles" />
         </div>
 

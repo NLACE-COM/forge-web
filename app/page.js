@@ -9,8 +9,10 @@ import ForgeFaqSection from "./components/ForgeFaqSection";
 import ForgeFilterSection from "./components/ForgeFilterSection";
 import ForgeHeader from "./components/ForgeHeader";
 import ForgeHeroSection from "./components/ForgeHeroSection";
+import ForgeMethodSection from "./components/ForgeMethodSection";
 import ForgeSystemsGridSection from "./components/ForgeSystemsGridSection";
 import ForgeWhatWeDoSection from "./components/ForgeWhatWeDoSection";
+import ScrollReveal from "./components/ScrollReveal";
 import {
   forgeApproachContent,
   forgeAreasContent,
@@ -23,25 +25,31 @@ import {
   forgeMethodContent,
   forgeNavLinks,
   forgeOutcomesContent,
-  forgeProblemContent,
   forgeProblemSlides
 } from "./forge-content";
 
 const forgeWhatWeDoSlidesWithWords = forgeProblemSlides.map((slide) => ({
   ...slide,
-  words: slide.text.split(" ")
+  blocks: slide.blocks.map((block) => ({
+    ...block,
+    words: block.segments.flatMap((segment) =>
+      segment.text.split(" ").filter(Boolean).map((word) => ({
+        word,
+        emphasis: Boolean(segment.emphasis)
+      }))
+    )
+  }))
 }));
 
 export default function ForgeHomePage() {
   const whatWeDoRef = useRef(null);
-  const methodRef = useRef(null);
   const areasRef = useRef(null);
   const [introStage, setIntroStage] = useState("poster");
   const [introVisible, setIntroVisible] = useState(true);
+  const [heroUiReady, setHeroUiReady] = useState(false);
   const [whatWeDoProgress, setWhatWeDoProgress] = useState(0);
-  const [methodVisible, setMethodVisible] = useState(false);
   const [areasVisible, setAreasVisible] = useState(false);
-  const stageReady = introStage === "video" || introStage === "done";
+  const stageReady = heroUiReady;
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -49,19 +57,22 @@ export default function ForgeHomePage() {
     if (reduceMotion) {
       setIntroStage("done");
       setIntroVisible(false);
+      setHeroUiReady(true);
       return undefined;
     }
 
-    const expandTimer = window.setTimeout(() => setIntroStage("expand"), 120);
-    const videoTimer = window.setTimeout(() => setIntroStage("video"), 1320);
+    const expandTimer = window.setTimeout(() => setIntroStage("expand"), 50);
+    const videoTimer = window.setTimeout(() => setIntroStage("video"), 850);
+    const uiTimer = window.setTimeout(() => setHeroUiReady(true), 900);
     const doneTimer = window.setTimeout(() => {
       setIntroStage("done");
       setIntroVisible(false);
-    }, 2280);
+    }, 1400);
 
     return () => {
       window.clearTimeout(expandTimer);
       window.clearTimeout(videoTimer);
+      window.clearTimeout(uiTimer);
       window.clearTimeout(doneTimer);
     };
   }, []);
@@ -92,28 +103,6 @@ export default function ForgeHomePage() {
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
     };
-  }, []);
-
-  useEffect(() => {
-    const section = methodRef.current;
-    if (!section) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setMethodVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -163,16 +152,24 @@ export default function ForgeHomePage() {
         />
       </section>
 
-      <ForgeNarrativeSection id="problem-signals" content={forgeProblemContent} className="narrative-section--problem" />
-      <ForgeAudienceSection content={forgeAudienceContent} />
-      <ForgeApproachSection content={forgeApproachContent} />
-      <ForgeSystemsGridSection
-        id="method"
-        sectionRef={methodRef}
-        isVisible={methodVisible}
-        content={forgeMethodContent}
-        className="systems-grid-section--method"
-      />
+      <ScrollReveal>
+        <div className="reveal-item">
+          <ForgeAudienceSection content={forgeAudienceContent} />
+        </div>
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <div className="reveal-item">
+          <ForgeApproachSection content={forgeApproachContent} />
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="reveal-item">
+          <ForgeMethodSection id="method" content={forgeMethodContent} />
+        </div>
+      </ScrollReveal>
+
       <ForgeSystemsGridSection
         id="areas"
         sectionRef={areasRef}
@@ -180,8 +177,19 @@ export default function ForgeHomePage() {
         content={forgeAreasContent}
         className="systems-grid-section--areas"
       />
-      <ForgeNarrativeSection id="outcomes" content={forgeOutcomesContent} />
-      <ForgeNarrativeSection id="diagnostic" content={forgeDiagnosticContent} />
+
+      <ScrollReveal stagger={0.2}>
+        <div className="reveal-item">
+          <ForgeNarrativeSection id="outcomes" content={forgeOutcomesContent} />
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="reveal-item">
+          <ForgeNarrativeSection id="diagnostic" content={forgeDiagnosticContent} />
+        </div>
+      </ScrollReveal>
+
       <ForgeFilterSection content={forgeFilterContent} />
       <ForgeFaqSection items={forgeFaqs} />
       <ForgeFooter content={forgeFooterContent} />

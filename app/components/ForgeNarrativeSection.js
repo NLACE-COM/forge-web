@@ -1,11 +1,13 @@
 import ForgeButton from "./ForgeButton";
+import ForgeEyebrow from "./ForgeEyebrow";
+import ForgeRevealHeading from "./ForgeRevealHeading";
 
 export default function ForgeNarrativeSection({ id, content, className = "" }) {
   return (
     <section id={id} className={`narrative-section layout-shell ${className}`.trim()}>
-      <div className="eyebrow">{content.eyebrow}</div>
+      <ForgeEyebrow>{content.eyebrow}</ForgeEyebrow>
       <div className="narrative-section__content">
-        {content.title ? <h2>{content.title}</h2> : null}
+        {content.title ? <ForgeRevealHeading text={content.title} /> : null}
         {content.body ? <p className="narrative-section__lead">{content.body}</p> : null}
         {content.intro ? <p className="narrative-section__lead">{content.intro}</p> : null}
         {content.description ? <p className="narrative-section__lead">{content.description}</p> : null}

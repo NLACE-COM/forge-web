@@ -1,10 +1,13 @@
+import ForgeEyebrow from "./ForgeEyebrow";
+import ForgeRevealHeading from "./ForgeRevealHeading";
+
 export default function ForgeDarkPanelSection({ eyebrow, title, columns }) {
   return (
     <section className="forge-dark-panel layout-shell">
-      <div className="eyebrow">{eyebrow}</div>
+      <ForgeEyebrow>{eyebrow}</ForgeEyebrow>
       <div className="forge-dark-panel__content">
         <div className="forge-dark-panel__lead">
-          <h2>{title}</h2>
+          <ForgeRevealHeading text={title} blockColor="rgba(17, 17, 17, 0.94)" />
         </div>
         <div className="forge-dark-panel__columns">
           {columns.map((column) => (

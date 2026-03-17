@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import ForgeEyebrow from "./ForgeEyebrow";
+import ForgeRevealHeading from "./ForgeRevealHeading";
 
 export default function ForgeAccordionList({ eyebrow, title, intro, items }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section className="forge-accordion layout-shell">
-      <div className="eyebrow">{eyebrow}</div>
+      <ForgeEyebrow>{eyebrow}</ForgeEyebrow>
       <div className="forge-accordion__content">
-        {title ? <h2>{title}</h2> : null}
+        {title ? <ForgeRevealHeading text={title} /> : null}
         {intro ? <p className="forge-accordion__intro">{intro}</p> : null}
         <div className="forge-accordion__items">
           {items.map((item, index) => {

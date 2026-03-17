@@ -1,10 +1,11 @@
 import ForgeButton from "./ForgeButton";
+import ForgeRevealHeading from "./ForgeRevealHeading";
 
 export default function ForgeFilterSection({ content }) {
   return (
     <section className="filter-section layout-shell">
       <div className="filter-section__inner">
-        <h2>{content.title}</h2>
+        <ForgeRevealHeading text={content.title} />
         <p>{content.body}</p>
         <div className="filter-section__actions">
           <ForgeButton href={content.primaryCta.href} label={content.primaryCta.label} />

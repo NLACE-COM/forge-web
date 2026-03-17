@@ -1,10 +1,13 @@
+import ForgeEyebrow from "./ForgeEyebrow";
+import ForgeRevealHeading from "./ForgeRevealHeading";
+
 export default function ForgeInsightCards({ eyebrow, title, intro, cards }) {
   return (
     <section className="forge-insight-cards layout-shell">
-      <div className="eyebrow">{eyebrow}</div>
+      <ForgeEyebrow>{eyebrow}</ForgeEyebrow>
       <div className="forge-insight-cards__content">
         <div className="forge-insight-cards__intro">
-          <h2>{title}</h2>
+          <ForgeRevealHeading text={title} />
           {intro ? <p>{intro}</p> : null}
         </div>
         <div className="forge-insight-cards__grid">

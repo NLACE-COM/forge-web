@@ -1,8 +1,8 @@
 export const forgeNavLinks = [
-  { href: "#problem", label: "Problema" },
-  { href: "#approach", label: "Enfoque" },
-  { href: "#areas", label: "Áreas" },
-  { href: "#faqs", label: "FAQs" }
+  { href: "/", label: "Home" },
+  { href: "/nosotros", label: "Nosotros" },
+  { href: "/servicios", label: "Servicios" },
+  { href: "/contacto", label: "Contacto" }
 ];
 
 export const forgeHeroContent = {
@@ -15,21 +15,127 @@ export const forgeHeroContent = {
   },
   microcopy: "Sin propuesta. Sin compromiso. Con diagnóstico.",
   trustLabel: "Logos de clientes",
-  trustItems: ["Client logo", "Client logo", "Client logo", "Client logo"]
+  trustItems: [
+    { src: "/forge/clients/AKIKB.png", alt: "AKIKB" },
+    { src: "/forge/clients/Crece-Capital.png", alt: "Crece Capital" },
+    { src: "/forge/clients/Frame-40271.png", alt: "Cliente Forge 40271" },
+    { src: "/forge/clients/Frame-40279.png", alt: "Cliente Forge 40279" },
+    { src: "/forge/clients/GECO.png", alt: "GECO" },
+    { src: "/forge/clients/Logo-Herbalife.png", alt: "Herbalife" },
+    { src: "/forge/clients/Logo-Logros.png", alt: "Logros" },
+    { src: "/forge/clients/Logo-Reppo.png", alt: "Reppo" },
+    { src: "/forge/clients/Logo-SafeLemon-1.png", alt: "SafeLemon" },
+    { src: "/forge/clients/Logo-SmartPlacement.png", alt: "SmartPlacement" },
+    { src: "/forge/clients/Logo-Valtek.png", alt: "Valtek" },
+    { src: "/forge/clients/Logo-Wift.png", alt: "Wift" },
+    { src: "/forge/clients/Logo-eClass.png", alt: "eClass" },
+    { src: "/forge/clients/Logo-gSense.png", alt: "gSense" },
+    { src: "/forge/clients/Logo-veramonte.png", alt: "Veramonte" },
+    { src: "/forge/clients/Pymetax.png", alt: "Pymetax" },
+    { src: "/forge/clients/Staff-1.png", alt: "Staff" },
+    { src: "/forge/clients/Staff.png", alt: "Staff" },
+    { src: "/forge/clients/TrainFES.png", alt: "TrainFES" },
+    { src: "/forge/clients/imed.png", alt: "iMed" }
+  ]
 };
 
 export const forgeProblemSlides = [
   {
     id: "01",
-    text: "El problema no es hacer más. Es operar sin sistema."
+    blocks: [
+      {
+        type: "text",
+        segments: [
+          { text: "El problema no es hacer más." },
+          { text: " Es operar sin sistema.", emphasis: true }
+        ]
+      }
+    ]
   },
   {
     id: "02",
-    text: "El crecimiento rara vez se rompe de golpe. Se desgasta."
+    blocks: [
+      {
+        type: "text",
+        segments: [{ text: "El crecimiento rara vez se rompe de golpe. Se desgasta." }]
+      },
+      {
+        type: "text",
+        segments: [{ text: "Empieza a verse así:" }]
+      }
+    ]
   },
   {
     id: "03",
-    text: "Te exigen crecer, pero tu operación no te deja pensar. Y sin espacio para pensar, solo queda reaccionar."
+    blocks: [
+      {
+        type: "bullet",
+        segments: [
+          { text: "Los " },
+          { text: "ciclos se alargan", emphasis: true },
+          { text: " y nadie tiene claro por qué." }
+        ]
+      },
+      {
+        type: "bullet",
+        segments: [
+          { text: "Las decisiones se vuelven " },
+          { text: "políticas o reactivas", emphasis: true },
+          { text: ", no informadas." }
+        ]
+      },
+      {
+        type: "bullet",
+        segments: [
+          { text: "Hay más reuniones, más iniciativas, más herramientas… y " },
+          { text: "menos claridad.", emphasis: true }
+        ]
+      },
+      {
+        type: "bullet",
+        segments: [
+          { text: "Marketing y ventas están alineados " },
+          { text: "en teoría", emphasis: true },
+          { text: ", pero se desordenan bajo presión." }
+        ]
+      },
+      {
+        type: "bullet",
+        segments: [
+          { text: "El " },
+          { text: "forecast", emphasis: true },
+          { text: " cambia, no por el mercado, sino por " },
+          { text: "ansiedad interna.", emphasis: true }
+        ]
+      }
+    ]
+  },
+  {
+    id: "04",
+    blocks: [
+      {
+        type: "text",
+        segments: [
+          { text: "No es falta de talento. " },
+          { text: "Es falta de estructura.", emphasis: true }
+        ]
+      }
+    ]
+  },
+  {
+    id: "05",
+    blocks: [
+      {
+        type: "text",
+        segments: [
+          { text: "Te exigen crecer, pero tu operación no te deja pensar.", emphasis: true }
+        ]
+      },
+      {
+        type: "text",
+        segments: [{ text: "Y sin espacio para pensar, solo queda reaccionar." }]
+      }
+    ]
   }
 ];
 
@@ -146,42 +252,46 @@ export const forgeMethodContent = {
 
 export const forgeAreasContent = {
   eyebrow: "Cuatro áreas. Una sola arquitectura.",
-  cta: {
-    href: "#diagnostic",
-    label: "Ver más"
-  },
   cards: [
     {
       id: "Forge RevOps",
+      logo: "/forge/logos/forge revops.svg",
+      logoAlt: "Forge RevOps",
       resolve:
         "Fricción estructural entre marketing, ventas y operación que rompe la previsibilidad del revenue.",
       install:
         "Gobernanza de revenue: procesos claros, ownership definido, métricas accionables y forecasting confiable.",
-      tone: "light"
+      tone: "revops"
     },
     {
       id: "Forge ABX",
+      logo: "/forge/logos/forge abx.svg",
+      logoAlt: "Forge ABX",
       resolve:
         "Dispersión de esfuerzos y pérdida de foco en ciclos B2B largos y complejos.",
       install:
         "Priorización por cuentas, orquestación cross-función y playbooks que alinean equipos alrededor de las cuentas que realmente importan.",
-      tone: "teal"
+      tone: "abx"
     },
     {
       id: "Forge AI",
+      logo: "/forge/logos/forge ai.svg",
+      logoAlt: "Forge AI",
       resolve:
         "Decisiones lentas y baja señal en contextos de alta complejidad.",
       install:
         "Inteligencia aplicada al GTM: automatización con criterio, mejor lectura de señales y soporte a la toma de decisiones.",
-      tone: "dark"
+      tone: "ai"
     },
     {
       id: "Forge Studio",
+      logo: "/forge/logos/forge studio.svg",
+      logoAlt: "Forge Studio",
       resolve:
         "Conocimiento valioso que no se convierte en autoridad ni en señal para el mercado.",
       install:
         "Contenido estratégico de alto valor: video podcasts, micro-eventos, material audiovisual y sistemas de reutilización que transforman experiencia en activos de posicionamiento.",
-      tone: "light"
+      tone: "studio"
     }
   ]
 };
@@ -270,16 +380,19 @@ export const forgeFaqs = [
 export const forgeFooterContent = {
   title: "Diseñamos estructura para que el crecimiento deje de depender de improvisación.",
   cta: {
-    href: "#diagnostic",
+    href: "/contacto",
     label: "Agendar diagnóstico"
   },
   navigate: [
-    { href: "#problem", label: "Problema" },
-    { href: "#approach", label: "Enfoque" },
-    { href: "#areas", label: "Áreas" },
-    { href: "#faqs", label: "FAQs" }
+    { href: "/", label: "Home" },
+    { href: "/nosotros", label: "Nosotros" },
+    { href: "/servicios", label: "Servicios" },
+    { href: "/contacto", label: "Contacto" }
   ],
-  connect: [{ href: "#hero", label: "LinkedIn" }, { href: "#hero", label: "Email" }],
+  connect: [
+    { href: "https://www.linkedin.com", label: "LinkedIn" },
+    { href: "mailto:hola@forge.so", label: "Email" }
+  ],
   brandLabel: "Forge",
   copyright: "© 2026 Forge. All rights reserved."
 };

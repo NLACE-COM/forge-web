@@ -1,21 +1,26 @@
+import Link from "next/link";
 import ForgeBrand from "./ForgeBrand";
 
-export default function ForgeHeader({ navLinks }) {
+export default function ForgeHeader({
+  navLinks,
+  ctaHref = "/contacto",
+  ctaLabel = "Explorar tu sistema"
+}) {
   return (
     <header className="topbar">
       <div className="topbar__inner layout-shell">
-        <a className="brand" href="#hero" aria-label="Forge">
+        <Link className="brand" href="/" aria-label="Forge">
           <ForgeBrand />
-        </a>
+        </Link>
         <nav className="topnav" aria-label="Primary">
           {navLinks.map((item) => (
-            <a href={item.href} key={item.href}>
+            <Link href={item.href} key={item.href}>
               {item.label}
-            </a>
+            </Link>
           ))}
-          <a href="#diagnostic" className="topnav-cta">
-            Conocer Forge
-          </a>
+          <Link href={ctaHref} className="topnav-cta">
+            {ctaLabel}
+          </Link>
         </nav>
       </div>
     </header>

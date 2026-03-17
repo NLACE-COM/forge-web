@@ -1,9 +1,14 @@
-export default function ForgeMarqueeSection() {
+export default function ForgeMarqueeSection({
+  text = "Rewriting the biology of aging",
+  className = ""
+}) {
+  const repeated = `${text} — ${text} —`;
+
   return (
-    <section className="marquee-band" aria-label="Writing the biology of aging">
+    <section className={`marquee-band ${className}`.trim()} aria-label={text}>
       <div className="marquee-band__track">
-        <span>Rewriting the biology of aging — Rewriting the biology of aging —</span>
-        <span>Rewriting the biology of aging — Rewriting the biology of aging —</span>
+        <span>{repeated}</span>
+        <span>{repeated}</span>
       </div>
     </section>
   );

@@ -1,11 +1,12 @@
 import ForgeBlobButton from "./ForgeBlobButton";
+import ForgeRevealHeading from "./ForgeRevealHeading";
 
 export default function ForgeContactPanel() {
   return (
     <section className="forge-contact-panel layout-shell">
       <div className="forge-contact-panel__shell">
         <div className="forge-contact-panel__header">
-          <h2>Message us</h2>
+          <ForgeRevealHeading text="Message us" blockColor="rgba(17, 17, 17, 0.94)" />
           <p>We’d love to hear from you — send us a message and we’ll be in touch soon.</p>
         </div>
 
