@@ -1,4 +1,5 @@
 import SmoothScroll from "./components/SmoothScroll";
+import "./tailwind.css";
 import "./globals.css";
 
 export const metadata = {

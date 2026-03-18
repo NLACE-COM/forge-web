@@ -1,23 +1,27 @@
 "use client";
 
-export default function ForgeButton({ href, label, className = "" }) {
-  const classes = className ? `hero-cta ${className}` : "hero-cta";
+const variantClasses = {
+  primary:
+    "hero-cta--primary tw:bg-[var(--color--2)] tw:text-white hover:tw:bg-white hover:tw:text-[var(--color--2)] hover:tw:ring-[1.5px] hover:tw:ring-[var(--color--2)] focus-visible:tw:bg-white focus-visible:tw:text-[var(--color--2)] focus-visible:tw:ring-[1.5px] focus-visible:tw:ring-[var(--color--2)]",
+  secondary:
+    "hero-cta--secondary tw:bg-[var(--color--9)] tw:text-white hover:tw:bg-white hover:tw:text-[var(--color--9)] hover:tw:ring-[1.5px] hover:tw:ring-[var(--color--9)] focus-visible:tw:bg-white focus-visible:tw:text-[var(--color--9)] focus-visible:tw:ring-[1.5px] focus-visible:tw:ring-[var(--color--9)]",
+  outlinePrimary:
+    "hero-cta--outline-primary tw:bg-white tw:text-[var(--color--2)] tw:ring-[1.5px] tw:ring-[var(--color--2)] hover:tw:bg-[var(--color--2)] hover:tw:text-white hover:tw:ring-[var(--color--2)] focus-visible:tw:bg-[var(--color--2)] focus-visible:tw:text-white focus-visible:tw:ring-[var(--color--2)]",
+  outlineSecondary:
+    "hero-cta--outline-secondary tw:bg-white tw:text-[var(--color--9)] tw:ring-[1.5px] tw:ring-[var(--color--9)] hover:tw:bg-[var(--color--9)] hover:tw:text-white hover:tw:ring-[var(--color--9)] focus-visible:tw:bg-[var(--color--9)] focus-visible:tw:text-white focus-visible:tw:ring-[var(--color--9)]"
+};
+
+export default function ForgeButton({
+  href,
+  label,
+  variant = "secondary",
+  className = ""
+}) {
+  const classes = `hero-cta tw:inline-flex tw:h-12 tw:w-fit tw:items-center tw:justify-center tw:rounded-full tw:px-6 tw:text-[var(--type-button)] tw:font-normal tw:leading-none tw:tracking-[-0.02em] tw:no-underline tw:transition-[background-color,color,box-shadow,transform] tw:duration-300 tw:ease-[var(--transition-ease--1)] focus-visible:tw:outline-none ${variantClasses[variant] ?? variantClasses.secondary} ${className}`.trim();
 
   return (
     <a className={classes} href={href}>
-      <span className="hero-cta__label">
-        {label}
-        <span className="hero-cta__corner" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="48" fill="none" viewBox="0 0 18 48">
-            <path fill="currentColor" d="M0 0h5.63c7.808 0 13.536 7.337 11.642 14.91l-6.09 24.359A11.527 11.527 0 0 1 0 48V0Z" />
-          </svg>
-        </span>
-      </span>
-      <span className="hero-cta__icon" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="48" fill="none" viewBox="0 0 51 48">
-          <path fill="currentColor" d="M6.728 9.09A12 12 0 0 1 18.369 0H39c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H12.37C4.561 48-1.167 40.663.727 33.09l6-24Z" />
-        </svg>
-      </span>
+      <span className="tw:whitespace-nowrap">{label}</span>
     </a>
   );
 }

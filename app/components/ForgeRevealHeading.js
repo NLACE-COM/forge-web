@@ -39,7 +39,7 @@ export default function ForgeRevealHeading({
   return (
     <h2
       ref={headingRef}
-      className={classes}
+      className={`${classes} tw:m-0 tw:text-[var(--type-h2)] tw:font-normal tw:leading-[0.96] tw:tracking-[-0.06em]`}
       style={blockColor ? { "--heading-reveal-block": blockColor } : undefined}
     >
       {words.map((word, index) => (

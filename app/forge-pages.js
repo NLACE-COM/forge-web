@@ -14,7 +14,7 @@ export const forgePages = {
       body:
         "Trabajamos junto al equipo para ordenar señales, ownership y ritmos de ejecución. El objetivo es que el crecimiento deje de depender de intuiciones, héroes o urgencias mal gestionadas.",
       media: {
-        src: "/wp-content/uploads/2025/10/Integrated_Biosciences-176-1024x683.jpg",
+        src: "/media/company/Integrated_Biosciences-176-1024x683.jpg",
         alt: "Equipo trabajando en laboratorio"
       },
       cta: {

@@ -25,6 +25,7 @@ import {
   forgeMethodContent,
   forgeNavLinks,
   forgeOutcomesContent,
+  forgeProblemContent,
   forgeProblemSlides
 } from "./forge-content";
 
@@ -141,6 +142,7 @@ export default function ForgeHomePage() {
           introStage={introStage}
           introVisible={introVisible}
           content={forgeHeroContent}
+          problemProgress={whatWeDoProgress}
         />
         <ForgeWhatWeDoSection
           sectionRef={whatWeDoRef}
@@ -149,6 +151,8 @@ export default function ForgeHomePage() {
           progress={whatWeDoProgress}
           activeIndex={activeIndex}
           label="The problem"
+          problemProgress={whatWeDoProgress}
+          afterContent={forgeProblemContent}
         />
       </section>
 

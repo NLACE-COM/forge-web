@@ -1,0 +1,12 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw);
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+  root: ":root";
+  prefix: d-;
+  logs: false;
+  exclude: rootcolor, rootscrollgutter, rootscrolllock, scrollbar, svg;
+}

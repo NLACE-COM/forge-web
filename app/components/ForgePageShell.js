@@ -8,9 +8,9 @@ export default function ForgePageShell({
   ctaLabel = "Explorar tu sistema"
 }) {
   return (
-    <main className="site-shell site-shell--inner">
+    <main className="site-shell site-shell--inner tw:min-h-screen tw:bg-[var(--bg)]">
       <ForgeHeader navLinks={forgeNavLinks} ctaHref={ctaHref} ctaLabel={ctaLabel} />
-      <div className="inner-page">{children}</div>
+      <div className="inner-page tw:pt-32 tw:pb-[120px] max-[980px]:tw:pt-28 max-[980px]:tw:pb-[88px]">{children}</div>
       <ForgeFooter content={forgeFooterContent} />
     </main>
   );
