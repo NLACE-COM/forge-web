@@ -1,5 +1,19 @@
 import ForgeButton from "./ForgeButton";
 
+function easeInOutCubic(value) {
+  if (value <= 0) {
+    return 0;
+  }
+
+  if (value >= 1) {
+    return 1;
+  }
+
+  return value < 0.5
+    ? 4 * value * value * value
+    : 1 - Math.pow(-2 * value + 2, 3) / 2;
+}
+
 function renderRotatingWords(text, baseIndex, className) {
   let wordIndex = 0;
 
@@ -40,7 +54,9 @@ export default function ForgeHeroSection({
 }) {
   const trustTrack = [...content.trustItems, ...content.trustItems];
   const posterHidden = introStage === "video" || introStage === "done";
-  const mediaProgress = Math.min(Math.max(problemProgress, 0), 1);
+  const mediaProgress = easeInOutCubic(
+    Math.min(Math.max((problemProgress - 0.91) / 0.09, 0), 1)
+  );
 
   return (
     <>
@@ -53,7 +69,7 @@ export default function ForgeHeroSection({
         <div className="tw:absolute tw:inset-0">
           <img
             className={`tw:absolute tw:inset-0 tw:block tw:h-full tw:w-full tw:object-cover tw:[object-position:42%_50%] tw:[transform:scaleX(-1)] hero-poster hero-poster--base ${posterHidden ? "is-hidden" : ""}`}
-            src="/media/hero-footer-poster.webp"
+            src="/media/hero-poster-0_0.jpg"
             alt=""
             aria-hidden="true"
           />
@@ -64,7 +80,7 @@ export default function ForgeHeroSection({
             loop
             playsInline
             preload="auto"
-            poster="/media/hero-footer-poster.webp"
+            poster="/media/hero-poster-0_0.jpg"
             aria-hidden="true"
           >
             <source src="/media/hero-loop.mp4?v=2" type="video/mp4" />
@@ -84,22 +100,28 @@ export default function ForgeHeroSection({
       >
         <div className="layout-shell tw:pointer-events-auto tw:relative tw:z-[3] tw:flex tw:min-h-screen tw:pt-[max(146px,min(calc(146px+(186-146)*((100vw-440px)/(1440-440))),186px))] tw:pb-[max(32px,min(calc(32px+0.012*(100vw-440px)),44px))] max-[980px]:tw:min-h-[100svh] max-[980px]:tw:pb-11 max-[980px]:tw:pt-[168px]">
           <div className="tw:flex tw:min-h-[calc(100vh-max(146px,min(calc(146px+(186-146)*((100vw-440px)/(1440-440))),186px))-max(32px,min(calc(32px+0.012*(100vw-440px)),44px)))] tw:w-full tw:flex-col tw:justify-between tw:gap-y-[100px] tw:text-[#f3f2ec] max-[980px]:tw:min-h-[calc(100svh-212px)]">
-            <div className="tw:mt-[144px] tw:max-w-[980px] tw:drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)] max-[980px]:tw:mt-[148px] max-[980px]:tw:max-w-full max-[640px]:tw:mt-[150px]">
+            <div className="tw:mt-[144px] tw:max-w-[1040px] tw:drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)] max-[980px]:tw:mt-[148px] max-[980px]:tw:max-w-full max-[640px]:tw:mt-[150px]">
               <div className="hero-stagger" style={{ "--stagger-index": 0 }}>
                 <div className="tw:inline-flex tw:mb-[26px] tw:rounded-[12px] tw:bg-[rgba(247,247,245,0.12)] tw:px-[14px] tw:py-[10px] tw:font-[var(--family--2)] tw:text-[0.82rem] tw:uppercase tw:tracking-[0.03em] tw:text-[rgba(243,242,236,0.9)] tw:backdrop-blur-[10px]">
                   {renderRotatingWords(content.eyebrow, 0, "hero-text-rotate")}
                 </div>
               </div>
-              <h1 className="hero-heading-rotate tw:m-0 tw:text-[max(3.1rem,min(calc(3.1rem+0.055*(100vw-27.5rem)),6.55rem))] tw:font-normal tw:leading-none tw:tracking-[-0.035em] tw:[text-wrap:pretty] max-[980px]:tw:text-[clamp(3.6rem,11.5vw,5.4rem)] max-[640px]:tw:text-[clamp(3rem,15vw,4.6rem)]">
+              <h1
+                className="hero-heading-rotate tw:m-0 tw:font-normal tw:leading-[0.86] tw:tracking-[-0.075em] tw:[text-wrap:pretty]"
+                style={{ fontSize: "clamp(4.1rem, 7.5vw, 7.6rem)" }}
+              >
                 {renderRotatingWords(content.title, 1, "hero-text-rotate hero-text-rotate--headline")}
               </h1>
             </div>
             <div className="tw:flex tw:w-full tw:items-end tw:justify-between tw:gap-x-[var(--gap)] tw:gap-y-6 tw:pb-[clamp(56px,7vw,96px)] max-[980px]:tw:flex-col max-[980px]:tw:items-start max-[980px]:tw:gap-7 max-[980px]:tw:pb-8">
               <div className="tw:flex tw:w-auto tw:flex-col tw:gap-6 tw:drop-shadow-[0_2px_14px_rgba(0,0,0,0.35)] max-[980px]:tw:w-full">
-                <p className="tw:m-0 tw:max-w-[710px] tw:text-[max(1.42rem,min(calc(1.42rem+0.007*(100vw-27.5rem)),2rem))] tw:leading-[1.14] tw:tracking-[-0.03em] tw:text-[rgba(243,242,236,0.82)] tw:[text-wrap:pretty] max-[640px]:tw:text-[1.28rem] max-[640px]:tw:leading-[1.18]">
+                <p
+                  className="tw:m-0 tw:max-w-[920px] tw:leading-[1.04] tw:tracking-[-0.045em] tw:text-[rgba(243,242,236,0.84)] tw:[text-wrap:pretty]"
+                  style={{ fontSize: "clamp(2.25rem, 3.35vw, 3.15rem)" }}
+                >
                   {renderRotatingWords(content.body, 2, "hero-text-rotate")}
                 </p>
-                <div className="tw:font-[var(--family--2)] tw:text-[1rem] tw:uppercase tw:tracking-[0.03em] tw:text-[rgba(243,242,236,0.72)] max-[640px]:tw:text-[0.95rem] max-[640px]:tw:leading-[1.45]">
+                <div className="tw:font-[var(--family--2)] tw:text-[clamp(1.14rem,1.5vw,1.42rem)] tw:uppercase tw:tracking-[0.02em] tw:text-[rgba(243,242,236,0.78)] max-[640px]:tw:text-[1.02rem] max-[640px]:tw:leading-[1.4]">
                   {renderRotatingWords(content.microcopy, 3, "hero-text-rotate")}
                 </div>
                 <div

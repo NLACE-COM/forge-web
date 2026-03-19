@@ -57,10 +57,7 @@ export const forgeProblemSlides = [
     blocks: [
       {
         type: "text",
-        segments: [
-          { text: "No es falta de talento. " },
-          { text: "Es falta de estructura.", emphasis: true }
-        ]
+        segments: [{ text: "El crecimiento rara vez se rompe de golpe." }]
       }
     ]
   },
@@ -69,31 +66,42 @@ export const forgeProblemSlides = [
     blocks: [
       {
         type: "text",
-        segments: [
-          { text: "Te exigen crecer, pero tu operación no te deja pensar.", emphasis: true }
-        ]
-      },
-      {
-        type: "text",
-        segments: [{ text: "Y sin espacio para pensar, solo queda reaccionar." }]
+        segments: [{ text: "Se desgasta." }]
       }
     ]
   }
 ];
 
 export const forgeProblemContent = {
-  headingSegments: [
-    { text: "El " },
-    { text: "crecimiento", accent: true },
-    { text: " rara vez se rompe de golpe. Se desgasta." }
-  ],
   subheading: "Empieza a verse así:",
   bullets: [
-    "Los ciclos se alargan y nadie tiene claro por qué.",
-    "Las decisiones se vuelven políticas o reactivas, no informadas.",
-    "Hay más reuniones, más iniciativas, más herramientas… y menos claridad.",
-    "Marketing y ventas están alineados en teoría, pero se desordenan bajo presión.",
-    "El forecast cambia, no por el mercado, sino por ansiedad interna."
+    [
+      { text: "Los " },
+      { text: "ciclos se alargan", accent: true },
+      { text: " y nadie tiene claro por qué." }
+    ],
+    [
+      { text: "Las decisiones se vuelven " },
+      { text: "políticas o reactivas", accent: true },
+      { text: ", no informadas." }
+    ],
+    [
+      { text: "Hay más reuniones, más iniciativas, más herramientas… y " },
+      { text: "menos claridad.", accent: true }
+    ],
+    [
+      { text: "Marketing y ventas están alineados " },
+      { text: "en teoría", accent: true },
+      { text: ", pero se desordenan bajo presión." }
+    ],
+    [
+      { text: "El forecast cambia, no por el mercado, sino por " },
+      { text: "ansiedad interna.", accent: true }
+    ]
+  ],
+  closing: [
+    { text: "No es falta de talento. " },
+    { text: "Es falta de estructura.", accent: true }
   ]
 };
 

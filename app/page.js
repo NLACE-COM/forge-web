@@ -128,11 +128,21 @@ export default function ForgeHomePage() {
     return () => observer.disconnect();
   }, []);
 
-  const slideSpan = 1 / forgeProblemSlides.length;
-  const activeIndex = Math.min(
-    forgeProblemSlides.length - 1,
-    Math.floor(whatWeDoProgress * forgeProblemSlides.length)
-  );
+  const slideSpans = [0.36, 0.24, 0.4];
+  const slideStarts = slideSpans.reduce((accumulator, span, index) => {
+    if (index === 0) {
+      return [0];
+    }
+
+    return [...accumulator, accumulator[index - 1] + slideSpans[index - 1]];
+  }, []);
+  const activeIndex = slideStarts.reduce((currentIndex, start, index) => {
+    if (whatWeDoProgress >= start) {
+      return index;
+    }
+
+    return currentIndex;
+  }, 0);
 
   return (
     <main className={`site-shell ${stageReady ? "is-stage-ready" : ""}`}>
@@ -147,10 +157,11 @@ export default function ForgeHomePage() {
         <ForgeWhatWeDoSection
           sectionRef={whatWeDoRef}
           slides={forgeWhatWeDoSlidesWithWords}
-          slideSpan={slideSpan}
+          slideSpans={slideSpans}
+          slideStarts={slideStarts}
           progress={whatWeDoProgress}
           activeIndex={activeIndex}
-          label="The problem"
+          label="El problema"
           problemProgress={whatWeDoProgress}
           afterContent={forgeProblemContent}
         />

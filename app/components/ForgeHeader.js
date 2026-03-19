@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import ForgeBrand from "./ForgeBrand";
 
 export default function ForgeHeader({
@@ -6,15 +10,67 @@ export default function ForgeHeader({
   ctaHref = "/contacto",
   ctaLabel = "Explorar tu sistema"
 }) {
+  const pathname = usePathname();
+  const headerRef = useRef(null);
+  const [isOverHeroMedia, setIsOverHeroMedia] = useState(pathname === "/");
+
+  useEffect(() => {
+    let frameId = null;
+
+    const updateLogoTone = () => {
+      const headerElement = headerRef.current;
+      const mediaElement = document.querySelector(".hero-stage__media");
+
+      if (!headerElement || !mediaElement) {
+        setIsOverHeroMedia(false);
+        return;
+      }
+
+      const headerRect = headerElement.getBoundingClientRect();
+      const mediaRect = mediaElement.getBoundingClientRect();
+      const logoBottomY = headerRect.top + Math.min(headerRect.height * 0.72, 64);
+      const overlapsMedia = logoBottomY <= mediaRect.bottom - 18;
+
+      setIsOverHeroMedia(overlapsMedia);
+    };
+
+    const requestUpdate = () => {
+      if (frameId !== null) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(() => {
+        frameId = null;
+        updateLogoTone();
+      });
+    };
+
+    updateLogoTone();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, []);
+
   return (
-    <header className="tw:fixed tw:left-0 tw:right-0 tw:z-[100] tw:w-full tw:top-12 max-[980px]:tw:top-[18px] max-[640px]:tw:top-0 max-[640px]:tw:px-[14px] max-[640px]:tw:pt-3 max-[640px]:tw:pb-[14px]">
+    <header
+      ref={headerRef}
+      className="tw:fixed tw:left-0 tw:right-0 tw:z-[100] tw:w-full tw:top-12 max-[980px]:tw:top-[18px] max-[640px]:tw:top-0 max-[640px]:tw:px-[14px] max-[640px]:tw:pt-3 max-[640px]:tw:pb-[14px]"
+    >
       <div className="topbar__inner layout-shell tw:flex tw:items-center tw:justify-between tw:gap-5 max-[980px]:tw:flex-col max-[980px]:tw:items-start">
         <Link
-          className="tw:inline-flex tw:min-h-[54px] tw:items-center tw:border-0 tw:bg-transparent tw:p-0 tw:text-white max-[980px]:tw:min-h-12 max-[980px]:tw:px-[14px]"
+          className="tw:inline-flex tw:min-h-[54px] tw:items-center tw:border-0 tw:bg-transparent tw:p-0 max-[980px]:tw:min-h-12 max-[980px]:tw:px-[14px]"
           href="/"
           aria-label="Forge"
         >
-          <ForgeBrand />
+          <ForgeBrand tone={isOverHeroMedia ? "light" : "brand"} />
         </Link>
         <nav
           className="tw:flex tw:items-center tw:gap-3 tw:rounded-[12px] tw:border tw:border-[var(--color--1)] tw:bg-[var(--panel)] tw:p-1 tw:backdrop-blur-[14px] tw:font-[var(--family--2)] tw:text-[max(0.75rem,min(calc(0.75rem+0.002*(100vw-27.5rem)),0.875rem))] tw:uppercase tw:leading-none max-[980px]:tw:w-full max-[980px]:tw:flex-wrap max-[980px]:tw:justify-between max-[640px]:tw:gap-4 max-[640px]:tw:text-[0.8rem]"
